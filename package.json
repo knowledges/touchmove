@@ -1,0 +1,19 @@
+{
+  "name": "touchmove",
+  "version": "1.0.0",
+  "description": "判断手势方向",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/knowledges/touchmove.git"
+  },
+  "author": "qiubl",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/knowledges/touchmove/issues"
+  },
+  "homepage": "https://github.com/knowledges/touchmove#readme"
+}

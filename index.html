@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+	<title>mouch move </title>
+	<style>
+		html {
+		  font-family: sans-serif;
+		  -ms-text-size-adjust: 100%;
+		  -webkit-text-size-adjust: 100%;
+		}
+		body {
+		  margin: 0;
+		}
+		article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+		  display: block;
+		}
+		audio, canvas, progress, video {
+		  display: inline-block;
+		  vertical-align: baseline;
+		}
+		audio:not([controls]) {
+		  display: none;
+		  height: 0;
+		}
+		[hidden], template {
+		  display: none;
+		}
+		a {
+		  background-color: transparent;
+		}
+		a:active, a:hover {
+		  outline: 0;
+		}
+		abbr[title] {
+		  border-bottom: 1px dotted;
+		}
+		b, strong {
+		  font-weight: bold;
+		}
+		dfn {
+		  font-style: italic;
+		}
+		h1 {
+		  font-size: 2em;
+		  margin: 0.67em 0;
+		}
+		mark {
+		  background: #ff0;
+		  color: #000;
+		}
+		small {
+		  font-size: 80%;
+		}
+		sub, sup {
+		  font-size: 75%;
+		  line-height: 0;
+		  position: relative;
+		  vertical-align: baseline;
+		}
+		sup {
+		  top: -0.5em;
+		}
+		sub {
+		  bottom: -0.25em;
+		}
+		img {
+		  border: 0;
+		}
+		svg:not(:root) {
+		  overflow: hidden;
+		}
+		figure {
+		  margin: 1em 40px;
+		}
+		hr {
+		  box-sizing: content-box;
+		  height: 0;
+		}
+		pre {
+		  overflow: auto;
+		}
+		code, kbd, pre, samp {
+		  font-family: monospace, monospace;
+		  font-size: 1em;
+		}
+		button, input, optgroup, select, textarea {
+		  color: inherit;
+		  font: inherit;
+		  margin: 0;
+		}
+		button {
+		  overflow: visible;
+		}
+		button, select {
+		  text-transform: none;
+		}
+		button, html input[type="button"], input[type="reset"], input[type="submit"] {
+		  -webkit-appearance: button;
+		  cursor: pointer;
+		}
+		button[disabled], html input[disabled] {
+		  cursor: default;
+		}
+		button::-moz-focus-inner, input::-moz-focus-inner {
+		  border: 0;
+		  padding: 0;
+		}
+		input {
+		  line-height: normal;
+		}
+		input[type="checkbox"], input[type="radio"] {
+		  box-sizing: border-box;
+		  padding: 0;
+		}
+		input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-outer-spin-button {
+		  height: auto;
+		}
+		input[type="search"] {
+		  -webkit-appearance: textfield;
+		  box-sizing: content-box;
+		}
+		input[type="search"]::-webkit-search-cancel-button, input[type="search"]::-webkit-search-decoration {
+		  -webkit-appearance: none;
+		}
+		fieldset {
+		  border: 1px solid #c0c0c0;
+		  margin: 0 2px;
+		  padding: 0.35em 0.625em 0.75em;
+		}
+		legend {
+		  border: 0;
+		  padding: 0;
+		}
+		textarea {
+		  overflow: auto;
+		}
+		optgroup {
+		  font-weight: bold;
+		}
+		table {
+		  border-collapse: collapse;
+		  border-spacing: 0;
+		}
+		td, th {
+		  padding: 0;
+		}
+		* {
+		  box-sizing: border-box;
+		  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+		  -webkit-touch-callout: none;
+		}
+		body {
+		  position: absolute;
+		  top: 0;
+		  right: 0;
+		  bottom: 0;
+		  left: 0;
+		  font-family: "Helvetica Neue", Helvetica, sans-serif;
+		  font-size: 0.85rem;
+		  line-height: 1.5;
+		  color: #3d4145;
+		  background: #eee;
+		  overflow: hidden;
+		}
+
+		#page{
+			position: absolute;
+			display: inline-block;
+			width: 100%;
+			height: 100%;
+			background: orange;
+		}
+		#page ul{
+			margin: 0 0;
+			padding: 0 0;
+		}
+		#page ul li {
+			color: #FFF;
+		}
+		#page ul li em {
+			color: #000;
+		}
+		#page ul li a{
+			color: red;
+		}
+		#page ul li:nth-child(even) a{
+			color: #000;
+		}
+	</style>
+</head>
+<body>
+	<div id="page">
+		<ul>
+			<li><em>X </em>开始坐标：<a id="start_x"></a></li>
+			<li><em>X </em>结束坐标：<a id="end_x"></a></li>
+			<li><em>Y </em>开始坐标：<a id="start_y"></a></li>
+			<li><em>Y </em>结束坐标：<a id="end_y"></a></li>
+			<br>
+			<li><em>X </em>移动：<a id="move_x"></a></li>
+			<li><em>Y </em>移动：<a id="move_y"></a></li>
+			<br>
+			<li><em>X </em>移动距离：<a id="range_x"></a></li>
+			<li><em>Y </em>移动距离：<a id="range_y"></a></li>
+			<br>
+			<li id="dsc"></li>
+		</ul>
+	</div>
+</body>
+<script>
+	function $(str) {
+		return document.getElementById(str);
+	}
+
+	var startX = 0,startY =0,endX=0,endY=0,moveX=0,moveY=0,rangeX = 0,rangeY = 0;
+
+	$("page").addEventListener("touchstart",startMove);
+	$("page").addEventListener("touchmove",transition);
+	$("page").addEventListener("touchend",endMove);
+
+	function startMove(e){
+		e.preventDefault();
+		startX = e.targetTouches[0].pageX;
+		startY = e.targetTouches[0].pageY;
+		$("start_x").innerHTML=startX;
+		$("start_y").innerHTML=startY;
+
+	}
+
+	function transition(e){
+		e.preventDefault();
+		moveX = e.changedTouches[0].pageX;
+		moveY = e.changedTouches[0].pageY;
+		$("move_x").innerHTML=moveX;
+		$("move_y").innerHTML=moveY;
+	}
+
+	function endMove(e){
+		e.preventDefault();
+		endX = e.changedTouches[0].pageX;
+		endY = e.changedTouches[0].pageY;
+		$("end_x").innerHTML=endX;
+		$("end_y").innerHTML=endY;
+
+		rangeX = endX - startX;
+		rangeY = endY - startY;
+		$("range_x").innerHTML=rangeX;
+		$("range_y").innerHTML=rangeY;
+
+		var direction = getDirection(startX,endX,startY,endY);
+		var str = "";
+		switch (direction) {
+	        case 0:
+	        	str = "没滑动"
+	            break;
+	        case 1:
+	        	str = "向下"
+	            break;
+	        case 2:
+	       		str = "向上"
+	            break;
+	        case 3:
+	             str = "向左"
+	            break;
+	        case 4:
+	         	str = "向右"
+	            break;
+	        default:            
+		}   
+		$("dsc").innerHTML = str;
+		console.log(str);
+	}
+
+	/*返回角度*/
+	function getAngle(dy,dx){
+		return Math.atan2(dy,dx)*180/Math.PI;
+	}
+
+	function getDirection(startX,endX,startY,endY){
+
+		var dx = endX - startX;
+		var dy = endY - startY;
+
+		var result = 0;
+
+		if( Math.abs(dx) < 30 && Math.abs(dy) < 30 ){
+			return result;
+		}
+
+		var angle = getAngle(dy,dx);
+
+		if (angle >= -45 && angle < 45) {
+			result = 4;
+		} else if (angle >= 45 && angle < 135) {
+			result = 1;
+		} else if (angle >= -135 && angle < -45) {
+			result = 2;
+		}
+		else if ((angle >= 135 && angle <= 180) || (angle >= -180 && angle < -135)) {
+			result = 3;
+		}
+
+		return result;
+	}
+
+</script>
+</html>
